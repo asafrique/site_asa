@@ -1,0 +1,44 @@
+[
+  {
+    "poster": "assets/posters/2026-06-21-tuyaba.jpg",
+    "speaker": "Arnauld Tuyaba",
+    "date": "21 juin 2026",
+    "sujet": "Consommation énergétique et équilibrage de lignes d’assemblage",
+    "annee": "2026"
+  },
+  {
+    "poster": "assets/posters/2026-04-12-djuikem-biological-questions.jpg",
+    "speaker": "Clotilde Djuikem",
+    "date": "12 avril 2026",
+    "sujet": "Des questions biologiques aux modèles mathématiques",
+    "annee": "2026"
+  },
+  {
+    "poster": "assets/posters/2026-03-08-tamekue.jpg",
+    "speaker": "Cyprien Tamekue",
+    "date": "8 mars 2026",
+    "sujet": "Contrôle des systèmes affines en la commande",
+    "annee": "2026"
+  },
+  {
+    "poster": "assets/posters/2025-12-14-markou.jpg",
+    "speaker": "Mohammed Safwen Markou",
+    "date": "14 décembre 2025",
+    "sujet": "Apprentissage par renforcement et feux de signalisation",
+    "annee": "2025"
+  },
+  {
+    "poster": "assets/posters/2025-07-13-el-haskouki.jpg",
+    "speaker": "Ikram El Haskouki",
+    "date": "13 juillet 2025",
+    "sujet": "Stabilisation de systèmes discrets à retard",
+    "annee": "2025"
+  },
+  {
+    "poster": "assets/posters/2024-02-11-prieur.jpg",
+    "speaker": "Christophe Prieur",
+    "date": "11 février 2024",
+    "sujet": "Contrôle saturé pour certaines équations aux dérivées partielles",
+    "annee": "2024"
+  }
+]
