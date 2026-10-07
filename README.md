@@ -104,3 +104,11 @@ c'est nécessaire : un fichier dans le dépôt reste plus rapide et ne dépend d
 
 GitHub Pages, dépôt `asafrique/site_asa`, branche `main`, dossier racine. Le fichier `CNAME` fixe le domaine personnalisé.
 Toute modification poussée sur `main` est en ligne en une à deux minutes.
+
+## Mise à jour des supports
+Pour les mini-cours, modifier assets/data/journal.json : titre, auteurs, date,
+resume et liens. Le catalogue, les cartes Mini-cours et l'aperçu Activités
+utilisent cette source unique. Déposer le PDF au chemin indiqué dans liens.
+Pour Cyprien, remplacer assets/slides/2026-03-08-tamekue-slides.pdf.
+Le générateur build_pages.py conserve la carte de support et ses styles.
+Tester en HTTP (python3 -m http.server 8000) pour permettre les chargements JSON.

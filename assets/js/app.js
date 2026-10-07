@@ -219,6 +219,32 @@
     compteurs.forEach(function (c) { obs.observe(c); });
   }
 
+  /* Supports : mêmes cartes et styles, données partagées avec le catalogue. */
+  var supportCours = document.querySelector("[data-support-cours]");
+  var apercuCours = document.getElementById("apercu-mini-cours");
+  if (supportCours || apercuCours) {
+    charger("assets/data/journal.json").then(function (d) {
+      var cours = d.filter(function (a) { return a.genre === "cours"; });
+      if (supportCours) {
+        cours.forEach(function (a) {
+          var lien = (a.liens || [])[0];
+          if (!lien) return;
+          var carte = supportCours.cloneNode(true);
+          carte.removeAttribute("data-support-cours");
+          carte.href = lien.url;
+          carte.querySelector("h3").textContent = a.titre;
+          carte.querySelector("p").textContent = a.resume;
+          carte.querySelector(".suite").textContent = lien.texte;
+          supportCours.parentNode.insertBefore(carte, supportCours);
+        });
+        supportCours.remove();
+      }
+      if (apercuCours) apercuCours.textContent = cours.length ?
+        "Supports disponibles : " + cours.map(function (a) { return a.titre; }).join(" ; ") + "." :
+        "Les prochains supports seront annoncés ici.";
+    }).catch(function () { /* Conserver le contenu HTML en cas d'échec. */ });
+  }
+
   /* ---------------------------------------------------------- journal */
   var catalogue = document.getElementById("catalogue");
   if (catalogue) {

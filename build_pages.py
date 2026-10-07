@@ -309,7 +309,7 @@ activites = f"""
       </a>
       <a class="carte" href="journal.html#mini-cours">
         <h3>Mini-cours</h3>
-        <p>Des séries courtes sur un thème technique, pensées pour les niveaux master et début de thèse. Premier cycle disponible : la quantification, en deux parties.</p>
+        <p>Des séries courtes sur un thème technique, pensées pour les niveaux master et début de thèse. <span id="apercu-mini-cours">Support disponible : Quantification en commande.</span></p>
         <span class="suite">Ouvrir les supports</span>
       </a>
     </div>
@@ -445,15 +445,10 @@ journal = f"""
       <p>Plus techniques que les articles, plus courts qu’un cours de master : les mini-cours ASA traitent un thème en deux ou trois séances, supports téléchargeables.</p>
     </div>
     <div class="grille-3" style="margin-top:var(--pas-3)">
-      <a class="carte" href="assets/docs/mini-cours-quantification-1.pdf" target="_blank" rel="noopener">
-        <h3>Quantification, partie 1</h3>
-        <p>Introduction et premiers outils.</p>
-        <span class="suite">Ouvrir le PDF</span>
-      </a>
-      <a class="carte" href="assets/docs/mini-cours-quantification-2.pdf" target="_blank" rel="noopener">
-        <h3>Quantification, partie 2</h3>
-        <p>Approfondissements et exemples travaillés.</p>
-        <span class="suite">Ouvrir le PDF</span>
+      <a class="carte" data-support-cours href="assets/docs/quantification.pdf" target="_blank" rel="noopener">
+        <h3>Quantification en commande</h3>
+        <p>De la dimension finie aux équations aux dérivées partielles. Un cours progressif, du novice au chercheur.</p>
+        <span class="suite">Lire le PDF</span>
       </a>
       <a class="carte" href="{FORM_SEMINAIRE}" target="_blank" rel="noopener">
         <h3>Proposer un mini-cours</h3>
