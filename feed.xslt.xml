@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Présentation du flux RSS des actualités ASA dans le navigateur.
+     Les applications de lecture (Feedly, Thunderbird…) ignorent ce fichier. -->
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:atom="http://www.w3.org/2005/Atom" exclude-result-prefixes="atom">
+<xsl:output method="html" encoding="UTF-8" indent="yes" doctype-system="about:legacy-compat"/>
+
+<xsl:template name="date-fr">
+  <xsl:param name="d"/>
+  <xsl:variable name="j" select="number(substring($d,9,2))"/>
+  <xsl:variable name="m" select="number(substring($d,6,2))"/>
+  <xsl:value-of select="$j"/><xsl:if test="$j = 1">er</xsl:if>
+  <xsl:text> </xsl:text>
+  <xsl:choose>
+    <xsl:when test="$m=1">janvier</xsl:when><xsl:when test="$m=2">février</xsl:when>
+    <xsl:when test="$m=3">mars</xsl:when><xsl:when test="$m=4">avril</xsl:when>
+    <xsl:when test="$m=5">mai</xsl:when><xsl:when test="$m=6">juin</xsl:when>
+    <xsl:when test="$m=7">juillet</xsl:when><xsl:when test="$m=8">août</xsl:when>
+    <xsl:when test="$m=9">septembre</xsl:when><xsl:when test="$m=10">octobre</xsl:when>
+    <xsl:when test="$m=11">novembre</xsl:when><xsl:otherwise>décembre</xsl:otherwise>
+  </xsl:choose>
+  <xsl:text> </xsl:text><xsl:value-of select="substring($d,1,4)"/>
+</xsl:template>
+
+<xsl:template match="/atom:feed">
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="robots" content="noindex"/>
+  <title>Flux RSS des actualités | ASA</title>
+  <link rel="icon" href="/assets/img/asa-logo-small.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&amp;family=Karla:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+    :root{--bronze:#6E5A33;--bronze-fonce:#463819;--bronze-profond:#332811;--or:#F1B81B;--or-clair:#FFD35C;--or-pale:#FBEBC0;--ivoire:#FAF6EC;--ivoire-2:#F1E9D6;--encre:#241C0C;--gris:#6B6250}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--ivoire);color:var(--encre);font:17px/1.65 Karla,"Helvetica Neue",Arial,sans-serif}
+    a{color:var(--bronze)}
+    .wrap{max-width:820px;margin:0 auto;padding:0 20px}
+    header{background:#fff;border-bottom:1px solid rgba(110,90,51,.15)}
+    header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:14px;padding-bottom:14px}
+    header img{height:46px;display:block}
+    header a.retour{font-weight:700;text-decoration:none;font-size:.95rem}
+    h1,h2{font-family:Fraunces,Georgia,serif;line-height:1.15;margin:0}
+    h1{font-size:clamp(2rem,5vw,2.8rem);margin:48px 0 12px}
+    .info{background:var(--bronze-profond);color:var(--ivoire);border-radius:10px;padding:22px 24px;margin:24px 0 40px}
+    .info b{color:var(--or)}
+    .info p{margin:0 0 10px}
+    .info ol{margin:0 0 4px;padding-left:20px}
+    .copie{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+    .copie code{flex:1;min-width:220px;background:rgba(255,255,255,.08);border:1px solid rgba(241,184,27,.4);border-radius:6px;padding:9px 12px;color:var(--or-clair);font-size:.9rem;word-break:break-all}
+    .copie button{font:inherit;font-weight:700;border:0;border-radius:100px;padding:9px 18px;background:var(--or);color:var(--encre);cursor:pointer}
+    .article{display:grid;grid-template-columns:200px 1fr;gap:22px;background:#fff;border:1px solid rgba(110,90,51,.2);border-radius:10px;padding:18px;margin-bottom:18px;text-decoration:none;color:inherit}
+    .article:hover{border-color:var(--or)}
+    .article img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:6px;background:var(--ivoire-2)}
+    .meta{font-size:.82rem;font-weight:700;color:var(--bronze);margin:0 0 4px}
+    .article h2{font-size:1.3rem;margin-bottom:6px}
+    .article p{margin:0;color:var(--gris);font-size:.95rem}
+    .suite{display:inline-block;margin-top:8px;font-weight:700;color:var(--bronze);font-size:.9rem}
+    footer{margin:48px 0 0;padding:28px 0;background:var(--bronze-profond);color:rgba(250,246,236,.8);font-size:.88rem}
+    footer a{color:var(--or)}
+    @media (max-width:600px){.article{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header><div class="wrap">
+    <a href="/"><img src="/assets/img/asa-logo.png" alt="Association Sciences pour l’Afrique"/></a>
+    <a class="retour" href="/actualites/">← Retour aux actualités</a>
+  </div></header>
+  <main class="wrap">
+    <h1>Flux RSS des actualités</h1>
+    <p>Recevez automatiquement chaque nouvelle publication de l’Association Sciences pour l’Afrique.</p>
+    <div class="info">
+      <p><b>Comment s’abonner ?</b></p>
+      <ol>
+        <li>Copiez l’adresse ci-dessous.</li>
+        <li>Collez-la dans votre lecteur de flux : Feedly, Inoreader, Thunderbird, Outlook ou l’application Podcasts/Actualités de votre téléphone.</li>
+        <li>Les nouvelles actualités d’ASA y apparaîtront dès leur publication.</li>
+      </ol>
+      <div class="copie">
+        <code id="adresse-flux"><xsl:value-of select="atom:link[@rel='self']/@href"/></code>
+        <button type="button" onclick="var b=this;navigator.clipboard.writeText(document.getElementById('adresse-flux').textContent).then(function(){b.textContent='Adresse copiée ✓'})">Copier l’adresse</button>
+      </div>
+    </div>
+    <xsl:for-each select="atom:entry">
+      <a class="article" href="{atom:link[@rel='alternate']/@href}">
+        <xsl:choose>
+          <xsl:when test="*[local-name()='thumbnail']/@url"><img src="{*[local-name()='thumbnail']/@url}" alt="" loading="lazy"/></xsl:when>
+          <xsl:otherwise><img src="/assets/img/asa-og.jpg" alt="" loading="lazy"/></xsl:otherwise>
+        </xsl:choose>
+        <div>
+          <p class="meta">
+            <xsl:call-template name="date-fr"><xsl:with-param name="d" select="atom:published"/></xsl:call-template>
+            <xsl:if test="atom:category"> · <xsl:value-of select="atom:category/@term"/></xsl:if>
+          </p>
+          <h2><xsl:value-of select="atom:title"/></h2>
+          <p><xsl:value-of select="substring(normalize-space(atom:summary),1,240)"/><xsl:if test="string-length(normalize-space(atom:summary)) &gt; 240">…</xsl:if></p>
+          <span class="suite">Lire l’article →</span>
+        </div>
+      </a>
+    </xsl:for-each>
+  </main>
+  <footer><div class="wrap">© Association Sciences pour l’Afrique · <a href="/">asafrique.org</a></div></footer>
+</body>
+</html>
+</xsl:template>
+</xsl:stylesheet>

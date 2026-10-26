@@ -27,6 +27,7 @@ kramdown:
 
 feed:
   path: actualites/flux.xml
+  xsl: true   # mise en forme du flux : feed.xslt.xml
 
 collections:
   seminaires:
