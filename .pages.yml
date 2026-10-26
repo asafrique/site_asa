@@ -1,0 +1,355 @@
+# ------------------------------------------------------------------
+# Configuration de Pages CMS (https://app.pagescms.org)
+# Décrit les formulaires d'édition du site ASA. À ne modifier que si
+# l'on veut ajouter un champ ou un nouveau type de contenu.
+# ------------------------------------------------------------------
+
+media:
+  - name: images
+    label: Images des actualités
+    input: assets/actualites
+    output: /assets/actualites
+    categories: [image]
+    rename: safe
+  - name: affiches
+    label: Affiches des séminaires
+    input: assets/posters
+    output: /assets/posters
+    categories: [image]
+    rename: safe
+  - name: diapositives
+    label: Diapositives (PDF)
+    input: assets/slides
+    output: /assets/slides
+    categories: [document]
+    rename: safe
+  - name: documents
+    label: Documents (PDF, ZIP)
+    input: assets/docs
+    output: /assets/docs
+    rename: safe
+  - name: portraits
+    label: Photos du bureau
+    input: assets/bureau
+    output: /assets/bureau
+    categories: [image]
+    rename: safe
+
+settings:
+  content:
+    merge: true   # conserve les champs techniques non affichés dans les formulaires
+  commit:
+    templates:
+      create: "Ajout de {path}"
+      update: "Modification de {path}"
+      delete: "Suppression de {path}"
+      rename: "Renommage de {oldPath} en {newPath}"
+
+content:
+  # ---------------------------------------------------------------- Actualités
+  - name: actualites
+    label: Actualités
+    type: collection
+    path: _posts
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, date, categorie]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Titre
+        type: string
+        required: true
+      - name: date
+        label: Date de publication
+        type: date
+        required: true
+      - name: categorie
+        label: Catégorie
+        type: select
+        options:
+          creatable: true
+          values: ["Vie de l’association", "Séminaire", "Appel à contributions", "Partenariat", "Événement", "Publication"]
+      - name: resume
+        label: Résumé (2 lignes, affiché sur les cartes)
+        type: text
+      - name: image
+        label: Image principale (facultative)
+        type: image
+        description: "Format paysage conseillé, 1600 pixels de large au maximum."
+        options:
+          media: images
+      - name: legende
+        label: Légende de l'image
+        type: string
+      - name: pdf
+        label: Document PDF joint (facultatif)
+        type: file
+        description: "Un bouton « Télécharger le document » apparaîtra sous l'article."
+        options:
+          media: documents
+          extensions: [pdf]
+      - name: auteur
+        label: Auteur·rice (facultatif)
+        type: string
+      - name: body
+        label: Texte de l'article
+        type: rich-text
+        options:
+          media: images
+
+  # ---------------------------------------------------------------- Séminaires
+  - name: seminaires
+    label: Séminaires
+    type: collection
+    path: _seminaires
+    filename: "{fields.date}-{primary}.md"
+    view:
+      fields: [orateur, title, date]
+      primary: orateur
+      sort: [date, orateur]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: orateur
+        label: Orateur·rice
+        type: string
+        required: true
+      - name: title
+        label: Titre de l'exposé
+        type: string
+        required: true
+      - name: affiliation
+        label: Affiliation (laboratoire, université, pays)
+        type: string
+      - name: date
+        label: Date de la séance
+        type: date
+        required: true
+        description: "Si la date n'est pas encore fixée, mettez une date approximative et remplissez le champ ci-dessous."
+      - name: date_affichee
+        label: Date affichée à la place (facultatif)
+        type: string
+        description: "Ex. : « Prochainement (date à confirmer) ». Laissez vide quand la date est fixée."
+      - name: heure
+        label: Heure (heure de Paris)
+        type: string
+        description: "Ex. : 20:00. Sert au compte à rebours et au bouton « Ajouter à mon agenda »."
+      - name: lien_visio
+        label: Lien Zoom / Meet (facultatif)
+        type: string
+        description: "Ajouté dans l'invitation agenda. Laissez vide pour ne pas le publier."
+      - name: a_venir
+        label: Séance à venir
+        type: boolean
+        default: false
+      - name: affiche
+        label: Affiche
+        type: image
+        options:
+          media: affiches
+      - name: vitrine
+        label: Montrer l'affiche en page d'accueil
+        type: boolean
+        default: false
+      - name: sujet_court
+        label: Sujet court (sous l'affiche en page d'accueil)
+        type: string
+      - name: body
+        label: Résumé de l'exposé
+        type: rich-text
+      - name: bio
+        label: Présentation de l'orateur·rice
+        type: text
+      - name: diapositives
+        label: Diapositives (PDF)
+        type: file
+        options:
+          media: diapositives
+          extensions: [pdf]
+      - name: annonce
+        label: Annonce ou résumé détaillé (PDF)
+        type: file
+        options:
+          media: documents
+          extensions: [pdf]
+      - name: video
+        label: Enregistrement (lien YouTube)
+        type: string
+      - name: site_orateur
+        label: Page web de l'orateur·rice
+        type: string
+
+  # ---------------------------------------------------------------- Bibliothèque
+  - name: bibliotheque
+    label: Bibliothèque du journal (articles, mini-cours, modèles)
+    type: collection
+    path: _bibliotheque
+    view:
+      fields: [titre, etiquette, ordre]
+      primary: titre
+      sort: [ordre, titre]
+    fields:
+      - name: titre
+        label: Titre
+        type: string
+        required: true
+      - name: genre
+        label: Rubrique (filtre)
+        type: select
+        required: true
+        options:
+          values:
+            - { value: article, label: Article }
+            - { value: cours, label: Mini-cours }
+            - { value: modele, label: Modèle }
+      - name: etiquette
+        label: Étiquette affichée
+        type: string
+        description: "Ex. : « Mini-cours », « Numéro 1 », « Modèle LaTeX »."
+      - name: auteurs
+        label: Auteur·rices
+        type: string
+      - name: date_texte
+        label: Date (en toutes lettres)
+        type: string
+        description: "Ex. : 18 janvier 2026"
+      - name: ordre
+        label: Ordre d'affichage
+        type: number
+        description: "1 = en premier."
+      - name: body
+        label: Résumé
+        type: text
+      - name: liens
+        label: Fichiers et liens
+        type: object
+        list: true
+        fields:
+          - name: texte
+            label: Texte du bouton
+            type: string
+            description: "Ex. : Lire le PDF"
+          - name: fichier
+            label: Fichier à déposer (PDF, ZIP)
+            type: file
+            options:
+              media: documents
+          - name: url
+            label: Ou adresse d'un lien externe
+            type: string
+
+  # ---------------------------------------------------------------- Bureau
+  - name: bureau
+    label: Bureau exécutif
+    type: collection
+    path: _bureau
+    view:
+      fields: [nom, fonction, ordre]
+      primary: nom
+      sort: [ordre, nom]
+    fields:
+      - name: nom
+        label: Prénom et nom
+        type: string
+        required: true
+      - name: fonction
+        label: Fonction
+        type: string
+        required: true
+      - name: initiales
+        label: Initiales (affichées s'il n'y a pas de photo)
+        type: string
+      - name: photo
+        label: Photo (facultative, format carré)
+        type: image
+        options:
+          media: portraits
+      - name: ordre
+        label: Ordre d'affichage
+        type: number
+      - name: body
+        label: Rôle en une phrase
+        type: text
+
+  # ---------------------------------------------------------------- Réglages
+  - name: reglages
+    label: Réglages du site (coordonnées, formulaires, réseaux)
+    type: file
+    path: _data/site.yml
+    fields:
+      - name: nom
+        label: Nom de l'association
+        type: string
+      - name: sigle
+        label: Sigle
+        type: string
+      - name: baseline
+        label: Présentation courte (pied de page)
+        type: text
+      - name: email
+        label: Adresse e-mail de contact
+        type: string
+      - name: rna
+        label: Numéro RNA
+        type: string
+      - name: siege
+        label: Siège
+        type: string
+      - name: declaration
+        label: Déclaration en préfecture
+        type: string
+      - name: publication_jo
+        label: Publication au Journal officiel
+        type: string
+      - name: formulaire_adhesion
+        label: Lien du formulaire d'adhésion
+        type: string
+      - name: formulaire_seminaire
+        label: Lien du formulaire « Proposer un exposé »
+        type: string
+      - name: heure_seminaire
+        label: Heure habituelle du séminaire (heure de Paris)
+        type: string
+      - name: bourse_tioh
+        label: Lien de la bourse Tioh Academy
+        type: string
+      - name: reseaux
+        label: Réseaux sociaux
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.nom}"
+        fields:
+          - name: nom
+            label: Nom affiché
+            type: string
+          - name: lien
+            label: Adresse (commence par https://)
+            type: string
+          - name: description
+            label: Petite description
+            type: string
+      - name: web3forms_cle
+        label: Clé Web3Forms (formulaire de contact)
+        type: string
+        description: "Clé reçue par e-mail sur web3forms.com. Vide = le formulaire ouvre la messagerie du visiteur."
+
+  - name: menu
+    label: Menu du site
+    type: file
+    path: _data/navigation.yml
+    list: true
+    fields:
+      - name: titre
+        label: Libellé
+        type: string
+      - name: lien
+        label: Adresse (ex. /contact.html)
+        type: string
