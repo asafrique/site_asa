@@ -1,27 +1,16 @@
-# ------------------------------------------------------------------
-# RÉGLAGES DU SITE ASA
-# Modifiable depuis Pages CMS (menu « Réglages du site »).
-# ------------------------------------------------------------------
 nom: Association Sciences pour l’Afrique
 sigle: ASA
-baseline: >-
-  Association loi 1901, apolitique et à but non lucratif, qui contribue à la
-  promotion et au développement des sciences en Afrique.
+baseline: Association loi 1901, apolitique et à but non lucratif, qui contribue
+  à la promotion et au développement des sciences en Afrique.
 email: contact@asafrique.org
 rna: W941020769
 siege: Maisons-Alfort, France
 declaration: préfecture du Val-de-Marne, 3 novembre 2025
 publication_jo: Journal officiel des associations, 11 novembre 2025
-
-# Formulaires Google (adhésion, proposition d'exposé)
 formulaire_adhesion: https://forms.gle/nd3MrV9NQJDFcSuC6
 formulaire_seminaire: https://forms.gle/T9jEudFH7i3tUBnf6
-# Heure habituelle du séminaire (heure de Paris), utilisée si une séance n'a pas d'heure.
-heure_seminaire: "20:00"
+heure_seminaire: 20:00
 bourse_tioh: https://tioh-academy.github.io/bourse.html
-
-# Réseaux sociaux : une ligne « nom / lien / description » par réseau.
-# Le réseau apparaît automatiquement dans le pied de page et la page Contact.
 reseaux:
   - nom: LinkedIn
     lien: https://www.linkedin.com/company/association-sciences-pour-l-afrique/
@@ -35,7 +24,4 @@ reseaux:
   - nom: WhatsApp
     lien: https://chat.whatsapp.com/Fy2bQDI7ddjBXvCgywHk6Q
     description: Groupe général de l’association
-
-# Formulaire de contact (service gratuit Web3Forms) : coller ici la clé
-# reçue sur https://web3forms.com. Vide = le bouton ouvre la messagerie.
-web3forms_cle: ""
+web3forms_cle: 2c54517b-749a-4828-9519-96f351739357
