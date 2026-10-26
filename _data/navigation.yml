@@ -1,0 +1,12 @@
+# Menu principal (le bouton « Adhérer » est ajouté automatiquement à la fin)
+- titre: Accueil
+  lien: /index.html
+- titre: Activités
+  lien: /activites.html
+  aussi: [/seminaires.html]
+- titre: Journal
+  lien: /journal.html
+- titre: Actualités
+  lien: /actualites/
+- titre: Contact
+  lien: /contact.html

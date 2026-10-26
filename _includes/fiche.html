@@ -1,0 +1,12 @@
+{%- assign a = include.doc -%}
+<article class="fiche" data-genre="{{ a.genre }}">
+  <span class="genre">{{ a.etiquette }}</span>
+  <h3>{{ a.titre }}</h3>
+  <p class="auteurs">{{ a.auteurs }}{% if a.date_texte and a.date_texte != "" %} · {{ a.date_texte }}{% endif %}</p>
+  {{ a.content | markdownify }}
+  {%- if a.liens and a.liens.size > 0 %}
+  <div class="liens-seance">
+    {%- for l in a.liens %}{% assign cible = l.fichier | default: l.url %}{% if cible and cible != "" %}<a class="puce" href="{{ cible | relative_url }}" target="_blank" rel="noopener">{{ l.texte }}</a>{% endif %}{% endfor -%}
+  </div>
+  {%- endif %}
+</article>

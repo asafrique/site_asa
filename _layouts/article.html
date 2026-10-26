@@ -1,0 +1,31 @@
+---
+layout: default
+---
+{%- assign url_abs = page.url | absolute_url -%}
+<article class="bloc article">
+  <div class="wrap wrap-article">
+    <p class="fil"><a href="{{ '/actualites/' | relative_url }}">← Toutes les actualités</a></p>
+    <p class="carte-actu-meta">{% include date-fr.html date=page.date %}{% if page.categorie %} · {{ page.categorie }}{% endif %}{% if page.auteur %} · {{ page.auteur }}{% endif %}</p>
+    <h1>{{ page.title }}</h1>
+    {%- if page.resume %}<p class="article-chapo">{{ page.resume }}</p>{% endif %}
+    {%- if page.image %}<figure class="article-image"><img src="{{ page.image | relative_url }}" alt="{{ page.legende | default: '' | escape }}">{% if page.legende %}<figcaption>{{ page.legende }}</figcaption>{% endif %}</figure>{% endif %}
+    <div class="article-corps">
+      {{ content }}
+    </div>
+    {%- if page.pdf %}
+    <p><a class="btn btn-bronze" href="{{ page.pdf | relative_url }}" target="_blank" rel="noopener">Télécharger le document (PDF)</a></p>
+    {%- endif %}
+    <div class="partage">
+      <span>Partager :</span>
+      <a href="https://wa.me/?text={{ page.title | append: ' ' | append: url_abs | url_encode }}" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ url_abs | url_encode }}" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ url_abs | url_encode }}" target="_blank" rel="noopener">Facebook</a>
+      <a href="mailto:?subject={{ page.title | url_encode }}&amp;body={{ url_abs | url_encode }}">E-mail</a>
+      <button type="button" class="copier-lien" data-url="{{ url_abs }}">Copier le lien</button>
+    </div>
+    <nav class="article-voisins" aria-label="Autres actualités">
+      {%- if page.previous %}<a href="{{ page.previous.url | relative_url }}"><small>Plus ancienne</small>{{ page.previous.title }}</a>{% else %}<span></span>{% endif %}
+      {%- if page.next %}<a class="droite" href="{{ page.next.url | relative_url }}"><small>Plus récente</small>{{ page.next.title }}</a>{% endif %}
+    </nav>
+  </div>
+</article>

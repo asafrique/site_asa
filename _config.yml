@@ -1,0 +1,57 @@
+# ------------------------------------------------------------------
+# Configuration technique du site ASA (à ne modifier que si nécessaire).
+# Coordonnées, formulaires et réseaux : _data/site.yml (ou Pages CMS,
+# menu « Réglages du site »).
+# ------------------------------------------------------------------
+title: ASA, Association Sciences pour l’Afrique
+description: >-
+  ASA, Association Sciences pour l’Afrique : un séminaire scientifique mensuel
+  en ligne depuis 2021, un journal de vulgarisation et des mini-cours ouverts à tous.
+url: "https://asafrique.org"
+baseurl: ""
+lang: fr_FR
+locale: fr_FR
+timezone: Europe/Paris
+logo: /assets/img/asa-logo.png
+image: /assets/img/asa-og.jpg
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-feed
+  - jekyll-redirect-from
+
+markdown: kramdown
+kramdown:
+  input: GFM
+
+feed:
+  path: actualites/flux.xml
+
+collections:
+  seminaires:
+    output: false
+  bibliotheque:
+    output: false
+  bureau:
+    output: false
+
+defaults:
+  - scope: { path: "", type: posts }
+    values:
+      layout: article
+      # Actualités : /actualites/2026/titre/
+      permalink: /actualites/:year/:title/
+  - scope: { path: "pages" }
+    values:
+      layout: default
+
+exclude:
+  - README.md
+  - GUIDE.md
+  - NOTES-CONTENU.md
+  - build_pages.py
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .pages.yml

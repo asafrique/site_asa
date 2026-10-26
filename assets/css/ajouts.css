@@ -1,0 +1,112 @@
+/* ==========================================================================
+   ASA — compléments (nouveautés du site dynamique).
+   Utilise uniquement les couleurs et espacements définis dans style.css.
+   ========================================================================== */
+
+[hidden]{display:none!important}
+.liens-seance:not(:has(a)){display:none}
+
+/* ---------- Prochaine séance (accueil) ---------- */
+.bloc-prochaine{background:var(--bronze-profond);color:var(--ivoire);padding:var(--pas-5) 0}
+.prochaine{display:grid;grid-template-columns:minmax(160px,260px) 1fr;gap:var(--pas-4);align-items:center}
+.prochaine-affiche img{width:100%;border-radius:var(--rayon-lg);box-shadow:0 18px 40px rgba(0,0,0,.35);display:block}
+.prochaine-affiche.sans-affiche{aspect-ratio:3/4;border-radius:var(--rayon-lg);display:grid;place-items:center;
+  background:linear-gradient(150deg,var(--bronze),var(--bronze-fonce));border:1px solid rgba(241,184,27,.35)}
+.prochaine-affiche.sans-affiche span{font-family:var(--serif);font-size:3rem;font-weight:700;color:var(--or)}
+.prochaine-etiquette{display:inline-flex;align-items:center;gap:8px;font-size:.8rem;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--or);margin:0 0 var(--pas-1)}
+.prochaine-etiquette::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--or);
+  box-shadow:0 0 0 0 rgba(241,184,27,.7);animation:pulsation 2s infinite}
+@keyframes pulsation{70%{box-shadow:0 0 0 10px rgba(241,184,27,0)}100%{box-shadow:0 0 0 0 rgba(241,184,27,0)}}
+.prochaine-date{font-weight:700;color:var(--or-clair);margin:0 0 6px}
+.prochaine h2{color:var(--blanc);margin:0 0 8px}
+.prochaine-orateur{color:rgba(250,246,236,.85);margin:0 0 var(--pas-2)}
+.prochaine-compte{display:inline-block;background:rgba(241,184,27,.14);color:var(--or-clair);font-weight:700;
+  padding:6px 14px;border-radius:100px;font-size:.92rem;margin:0 0 var(--pas-2)}
+.prochaine .btn-ligne{color:var(--ivoire);border-color:rgba(250,246,236,.5);background:transparent;cursor:pointer;font:inherit;font-weight:700}
+.prochaine .btn-ligne:hover{background:rgba(255,255,255,.12);color:#fff}
+@media (max-width:720px){.prochaine{grid-template-columns:1fr}.prochaine-affiche{max-width:240px}}
+
+/* ---------- Recherche dans l'archive ---------- */
+.recherche-seances{margin-bottom:var(--pas-3);max-width:560px}
+.recherche-seances label{display:block;font-weight:700;font-size:.9rem;color:var(--bronze);margin-bottom:6px}
+.recherche-seances input{width:100%;font:inherit;padding:12px 16px 12px 42px;border-radius:100px;
+  border:1px solid rgba(110,90,51,.35);background:var(--blanc) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='none' stroke='%236E5A33' stroke-width='2' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E") no-repeat 16px center}
+.recherche-seances input:focus{outline:2px solid var(--or);outline-offset:2px;border-color:var(--bronze)}
+.recherche-statut{font-size:.88rem;color:var(--gris);margin:8px 0 0;min-height:1.2em}
+.rail.estompe{opacity:.4;pointer-events:auto}
+.seance.surligne .seance-tete{background:var(--or-pale);border-radius:var(--rayon)}
+
+/* ---------- Actualités ---------- */
+.grille-actus{align-items:stretch}
+.actu-item{display:flex}
+.actu-item>.carte{flex:1}
+.carte-actu{padding:0;overflow:hidden}
+.carte-actu>*:not(.carte-actu-image){margin-left:var(--pas-3);margin-right:var(--pas-3)}
+.carte-actu>.carte-actu-meta{margin-top:var(--pas-3)}
+.carte-actu>.suite{margin-bottom:var(--pas-3)}
+.carte-actu-image{display:block;aspect-ratio:16/9;overflow:hidden;background:var(--ivoire-2)}
+.carte-actu-image img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.carte-actu:hover .carte-actu-image img{transform:scale(1.04)}
+.carte-actu-meta{font-size:.82rem;font-weight:700;color:var(--bronze);letter-spacing:.02em;margin:0 0 6px}
+.actus-accueil .grille-3{margin-top:var(--pas-3)}
+
+.wrap-article{max-width:760px}
+.fil{font-size:.9rem;margin:0 0 var(--pas-3)}
+.article h1{margin:0 0 var(--pas-2)}
+.article-chapo{font-family:var(--serif);font-size:1.2rem;color:var(--bronze-fonce);line-height:1.5}
+.article-image{margin:var(--pas-3) 0}
+.article-image img{width:100%;border-radius:var(--rayon-lg);display:block}
+.article-image figcaption{font-size:.85rem;color:var(--gris);margin-top:6px}
+.article-corps{font-size:1.04rem;line-height:1.7}
+.article-corps img{max-width:100%;height:auto;border-radius:var(--rayon)}
+.article-corps h2{margin-top:var(--pas-4)}
+.article-corps blockquote{margin:var(--pas-3) 0;padding:var(--pas-2) var(--pas-3);border-left:4px solid var(--or);background:var(--ivoire-2);border-radius:0 var(--rayon) var(--rayon) 0}
+.partage{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:var(--pas-4) 0 var(--pas-3);
+  padding-top:var(--pas-3);border-top:1px solid rgba(110,90,51,.2)}
+.partage span{font-weight:700;font-size:.9rem;color:var(--gris);margin-right:4px}
+.partage a,.partage button{font:inherit;font-size:.88rem;font-weight:700;padding:6px 14px;border-radius:100px;
+  border:1px solid rgba(110,90,51,.3);background:var(--blanc);color:var(--bronze);cursor:pointer;text-decoration:none}
+.partage a:hover,.partage button:hover{background:var(--or-pale);border-color:var(--or)}
+.article-voisins{display:grid;grid-template-columns:1fr 1fr;gap:var(--pas-2)}
+.article-voisins a{display:block;padding:var(--pas-2);border:1px solid rgba(110,90,51,.2);border-radius:var(--rayon-lg);
+  background:var(--blanc);font-weight:700;text-decoration:none;color:var(--encre)}
+.article-voisins a:hover{border-color:var(--or)}
+.article-voisins small{display:block;font-size:.78rem;color:var(--bronze);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.article-voisins .droite{text-align:right;grid-column:2}
+@media (max-width:600px){.article-voisins{grid-template-columns:1fr}.article-voisins .droite{grid-column:1}}
+
+/* ---------- Formulaire de contact ---------- */
+.formulaire-contact{display:grid;gap:var(--pas-2);margin:var(--pas-3) 0;padding:var(--pas-3);
+  background:var(--blanc);border:1px solid rgba(110,90,51,.2);border-radius:var(--rayon-lg)}
+.formulaire-contact label{display:grid;gap:6px;font-weight:700;font-size:.9rem;color:var(--bronze-fonce)}
+.formulaire-contact input,.formulaire-contact select,.formulaire-contact textarea{
+  font:inherit;font-weight:400;color:var(--encre);padding:11px 14px;border-radius:var(--rayon);
+  border:1px solid rgba(110,90,51,.35);background:var(--ivoire);width:100%}
+.formulaire-contact textarea{resize:vertical;min-height:140px}
+.formulaire-contact :is(input,select,textarea):focus{outline:2px solid var(--or);outline-offset:1px;border-color:var(--bronze);background:var(--blanc)}
+.formulaire-contact button{justify-self:start;border:0;cursor:pointer;font:inherit;font-weight:700}
+.formulaire-contact button:disabled{opacity:.6;cursor:wait}
+.champs-2{display:grid;grid-template-columns:1fr 1fr;gap:var(--pas-2)}
+@media (max-width:560px){.champs-2{grid-template-columns:1fr}}
+.piege{position:absolute;left:-9999px;opacity:0}
+.formulaire-statut{margin:0;font-size:.95rem;min-height:1.2em}
+.formulaire-statut.ok{color:#2f6b2a;font-weight:700}
+.formulaire-statut.erreur{color:#9a2b1d;font-weight:700}
+.contact-direct{font-size:.95rem;color:var(--gris)}
+
+/* ---------- Bureau : photo facultative ---------- */
+img.membre-photo{object-fit:cover;padding:0}
+
+/* ---------- Bouton haut de page ---------- */
+.haut-de-page{position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:50%;border:0;
+  background:var(--bronze);color:var(--or);font-size:1.2rem;font-weight:700;cursor:pointer;z-index:50;
+  box-shadow:0 6px 18px rgba(36,28,12,.25);opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s}
+.haut-de-page.visible{opacity:1;transform:none;pointer-events:auto}
+.haut-de-page:hover{background:var(--bronze-fonce)}
+
+/* ---------- Grille d'actualités et titres avec lien ---------- */
+.grille-actus{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:var(--pas-3)}
+.intro-ligne{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:var(--pas-2);max-width:none}
+.lien-suite{font-weight:700;color:var(--bronze);white-space:nowrap}
+.lien-suite::after{content:" →"}

@@ -1,0 +1,46 @@
+{%- assign s = site.data.site -%}
+<footer class="pied">
+  <div class="wrap">
+    <div class="pied-grille">
+      <div>
+        <a class="pied-logo" href="{{ '/' | relative_url }}">
+          <img src="{{ '/assets/img/asa-logo.png' | relative_url }}" alt="Association Sciences pour l’Afrique">
+        </a>
+        <p class="baseline">{{ s.baseline }}</p>
+      </div>
+      <div>
+        <h4>Activités</h4>
+        <ul>
+          <li><a href="{{ '/seminaires.html' | relative_url }}">ASA Séminaire</a></li>
+          <li><a href="{{ '/journal.html' | relative_url }}">Journal de vulgarisation</a></li>
+          <li><a href="{{ '/journal.html#mini-cours' | relative_url }}">Mini-cours</a></li>
+          <li><a href="{{ '/actualites/' | relative_url }}">Actualités</a></li>
+          <li><a href="{{ '/activites.html#soutiens' | relative_url }}">Ce que nous soutenons</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Participer</h4>
+        <ul>
+          <li><a href="{{ '/adhesion.html' | relative_url }}">Adhérer</a></li>
+          <li><a href="{{ s.formulaire_seminaire }}" target="_blank" rel="noopener">Proposer un exposé</a></li>
+          <li><a href="{{ '/journal.html#publier' | relative_url }}">Publier un article</a></li>
+          <li><a href="{{ '/contact.html' | relative_url }}">Nous écrire</a></li>
+          <li><a href="{{ '/bureau.html' | relative_url }}">Le bureau exécutif</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Suivre</h4>
+        <ul>
+          {%- for r in s.reseaux %}
+          <li><a href="{{ r.lien }}" target="_blank" rel="noopener">{% if r.nom == 'WhatsApp' %}Groupe WhatsApp{% else %}{{ r.nom }}{% endif %}</a></li>
+          {%- endfor %}
+          <li><a href="{{ '/actualites/flux.xml' | relative_url }}">Flux RSS des actualités</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pied-bas">
+      <span>© <span id="annee">{{ site.time | date: '%Y' }}</span> {{ s.nom }}, RNA {{ s.rna }}</span>
+      <span><a href="mailto:{{ s.email }}">{{ s.email }}</a></span>
+    </div>
+  </div>
+</footer>

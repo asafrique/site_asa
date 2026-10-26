@@ -1,0 +1,36 @@
+{%- assign s = include.seance -%}
+{%- capture libelle_date -%}{% if s.date_affichee and s.date_affichee != "" %}{{ s.date_affichee }}{% else %}{% include date-fr.html date=s.date %}{% endif %}{%- endcapture -%}
+{%- assign libelle_date = libelle_date | strip -%}
+{%- assign id_seance = s.date | date: "%Y-%m-%d" | append: "-" | append: s.orateur | slugify -%}
+{%- assign resume = s.content | strip -%}
+<article class="seance" id="s-{{ id_seance }}" data-recherche="{{ s.title | append: ' ' | append: s.orateur | append: ' ' | append: s.affiliation | append: ' ' | append: libelle_date | downcase | escape }}" data-date="{{ s.date | date: '%Y-%m-%d' }}"{% if s.date_affichee and s.date_affichee != "" %} data-date-approx="1"{% endif %}>
+  <button class="seance-tete" type="button" aria-expanded="false" aria-controls="s-{{ id_seance }}-corps">
+    <span class="seance-date">{{ libelle_date }}</span>
+    <div>
+      <span class="seance-titre">{{ s.title }}</span>
+      <p class="seance-orateur">{{ s.orateur }}{% if s.affiliation and s.affiliation != "" %} ({{ s.affiliation }}){% endif %}</p>
+    </div>
+    <span class="chevron" aria-hidden="true">+</span>
+  </button>
+  <div class="seance-corps" id="s-{{ id_seance }}-corps">
+    <div class="vide"></div><div class="seance-detail">
+      {%- if s.affiche and s.affiche != "" %}
+      <a class="affiche-lien" href="{{ s.affiche | relative_url }}" target="_blank" rel="noopener"><img src="{{ s.affiche | relative_url }}" alt="Affiche du séminaire de {{ s.orateur }}" loading="lazy"></a>
+      <p class="affiche-legende">Cliquez sur l’affiche pour l’ouvrir en grand format.</p>
+      {%- endif %}
+      {%- if resume != "" %}<h4>Résumé</h4>{{ resume | markdownify }}{% endif %}
+      {%- if s.bio and s.bio != "" %}<h4>L’orateur·rice</h4>{{ s.bio | markdownify }}{% endif %}
+      {%- assign a_contenu = false -%}
+      {%- if resume != "" %}{% assign a_contenu = true %}{% endif -%}
+      {%- if s.bio and s.bio != "" %}{% assign a_contenu = true %}{% endif -%}
+      {%- if s.affiche and s.affiche != "" %}{% assign a_contenu = true %}{% endif -%}
+      {%- unless a_contenu %}{% if s.a_venir %}<p>Le titre et le résumé de cette séance seront publiés dès qu’ils seront confirmés.</p>{% else %}<p>Le résumé de cette séance n’a pas été archivé.</p>{% endif %}{% endunless %}
+      <div class="liens-seance">
+        {%- if s.video and s.video != "" %}<a class="puce" href="{{ s.video }}" target="_blank" rel="noopener">Voir l’enregistrement</a>{% endif %}
+        {%- if s.diapositives and s.diapositives != "" %}<a class="puce" href="{{ s.diapositives | relative_url }}" target="_blank" rel="noopener">Diapositives (PDF)</a>{% endif %}
+        {%- if s.annonce and s.annonce != "" %}<a class="puce" href="{{ s.annonce | relative_url }}" target="_blank" rel="noopener">Annonce et résumé (PDF)</a>{% endif %}
+        {%- if s.site_orateur and s.site_orateur != "" %}<a class="puce" href="{{ s.site_orateur }}" target="_blank" rel="noopener">Page de l’orateur·rice</a>{% endif %}
+      </div>
+    </div>
+  </div>
+</article>

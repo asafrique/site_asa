@@ -1,0 +1,7 @@
+{%- comment -%} Toutes les séances, lues par le navigateur pour « Prochaine séance » et « Ajouter à mon agenda ». {%- endcomment -%}
+<script type="application/json" id="donnees-seances">[
+{%- assign liste_js = site.seminaires | sort: "date" -%}
+{%- for s in liste_js %}
+{"date":{{ s.date | date: "%Y-%m-%d" | jsonify }},"heure":{{ s.heure | default: site.data.site.heure_seminaire | default: "" | jsonify }},"titre":{{ s.title | jsonify }},"orateur":{{ s.orateur | jsonify }},"affiliation":{{ s.affiliation | default: "" | jsonify }},"affiche":{{ s.affiche | default: "" | relative_url | jsonify }},"id":{{ s.date | date: "%Y-%m-%d" | append: "-" | append: s.orateur | slugify | prepend: "s-" | jsonify }},"lien":{{ s.lien_visio | default: "" | jsonify }},"approx":{{ s.date_affichee | default: "" | jsonify }},"a_venir":{% if s.a_venir %}true{% else %}false{% endif %}}{% unless forloop.last %},{% endunless %}
+{%- endfor %}
+]</script>

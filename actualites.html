@@ -1,0 +1,30 @@
+---
+layout: default
+title: "Actualités"
+permalink: /actualites/
+description: "Les nouvelles de l’Association Sciences pour l’Afrique : séances, appels à contributions, vie de l’association."
+---
+<section class="bloc">
+  <div class="wrap">
+    <div class="intro-bloc">
+      <h1>Actualités</h1>
+      <p>Annonces de séances, appels à contributions, partenariats et vie de l’association. Pour ne rien manquer, suivez-nous sur nos réseaux ou abonnez-vous au <a href="{{ '/actualites/flux.xml' | relative_url }}">flux RSS</a>.</p>
+    </div>
+    {%- assign categories = site.posts | map: "categorie" | compact | uniq -%}
+    {%- if categories.size > 1 %}
+    <div class="filtres" id="filtres-actus" role="group" aria-label="Filtrer les actualités">
+      <button type="button" data-filtre="tout" aria-pressed="true">Tout</button>
+      {%- for c in categories %}<button type="button" data-filtre="{{ c | slugify }}" aria-pressed="false">{{ c }}</button>{% endfor %}
+    </div>
+    {%- endif %}
+    {%- if site.posts.size > 0 %}
+    <div class="grille-3 grille-actus">
+      {%- for a in site.posts %}
+      <div class="actu-item" data-categorie="{{ a.categorie | slugify }}">{% include carte-actu.html article=a %}</div>
+      {%- endfor %}
+    </div>
+    {%- else %}
+    <p class="etat-vide">Aucune actualité pour le moment. Revenez bientôt !</p>
+    {%- endif %}
+  </div>
+</section>

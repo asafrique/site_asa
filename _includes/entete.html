@@ -1,0 +1,21 @@
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="entete">
+  <div class="wrap entete-int">
+    <a class="marque" href="{{ '/' | relative_url }}" aria-label="ASA, Association Sciences pour l’Afrique, accueil">
+      <img src="{{ '/assets/img/asa-logo.png' | relative_url }}" alt="Association Sciences pour l’Afrique" width="1200" height="590">
+    </a>
+    <button class="burger" aria-expanded="false" aria-controls="menu-principal" aria-label="Ouvrir le menu">☰</button>
+    <nav class="menu" id="menu-principal" aria-label="Navigation principale">
+      {%- assign url_page = page.url | replace: '/index.html', '/' -%}
+      {%- for item in site.data.navigation %}
+      {%- assign lien_item = item.lien | replace: '/index.html', '/' -%}
+      {%- assign actif = false -%}
+      {%- if url_page == lien_item or page.menu_actif == item.lien -%}{%- assign actif = true -%}{%- endif -%}
+      {%- if item.aussi contains page.url -%}{%- assign actif = true -%}{%- endif -%}
+      {%- if lien_item == '/actualites/' and page.layout == 'article' -%}{%- assign actif = true -%}{%- endif %}
+      <a href="{{ item.lien | relative_url }}"{% if actif %} aria-current="page"{% endif %}>{{ item.titre }}</a>
+      {%- endfor %}
+      <a class="cta" href="{{ '/adhesion.html' | relative_url }}">Adhérer</a>
+    </nav>
+  </div>
+</header>

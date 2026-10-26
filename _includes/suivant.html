@@ -1,0 +1,6 @@
+<section class="bloc suivant">
+  <div class="wrap">
+    <h2>{{ include.titre | default: "Continuer" }}</h2>
+    <div class="suivant-grille">{% for c in include.cartes %}<a href="{{ c.lien | relative_url }}"><b>{{ c.titre }}</b><span>{{ c.texte | replace: "[nb_seances]", site.seminaires.size }}</span></a>{% endfor %}</div>
+  </div>
+</section>

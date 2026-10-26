@@ -1,0 +1,8 @@
+{%- assign a = include.article -%}
+<a class="carte carte-actu" href="{{ a.url | relative_url }}">
+  {%- if a.image %}<span class="carte-actu-image"><img src="{{ a.image | relative_url }}" alt="" loading="lazy"></span>{% endif %}
+  <span class="carte-actu-meta">{% include date-fr.html date=a.date %}{% if a.categorie %} · {{ a.categorie }}{% endif %}</span>
+  <h3>{{ a.title }}</h3>
+  <p>{{ a.resume | default: a.excerpt | strip_html | truncatewords: 30 }}</p>
+  <span class="suite">Lire l’article</span>
+</a>
