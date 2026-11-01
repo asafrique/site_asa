@@ -26,7 +26,7 @@ suivant:
       <h1>ASA Séminaire</h1>
       <p>{{ page.intro }}</p>
       <div class="hero-actions">
-        <a class="btn btn-bronze" href="{{ s.formulaire_seminaire }}" target="_blank" rel="noopener">Proposer un exposé</a>
+        <a class="btn btn-bronze" {% include lien-formulaire.html cle="seminaire" %}>Proposer un exposé</a>
         <a class="btn btn-ligne" href="{{ '/contact.html' | relative_url }}">Suivre les annonces</a>
       </div>
     </div>
@@ -53,7 +53,7 @@ suivant:
       </div>
       {%- endfor %}
       <div class="annee-seances" data-annee="{{ annee_suivante }}">
-        <div class="etat-vide"><h3>La programmation {{ annee_suivante }} s’écrit maintenant</h3><p>Aucune séance n’est encore fixée pour cette année. Proposez un exposé : une séance par mois, en ligne, une heure.</p><a class="btn btn-or" href="{{ s.formulaire_seminaire }}" target="_blank" rel="noopener">Proposer un exposé</a></div>
+        <div class="etat-vide"><h3>La programmation {{ annee_suivante }} s’écrit maintenant</h3><p>Aucune séance n’est encore fixée pour cette année. Proposez un exposé : une séance par mois, en ligne, une heure.</p><a class="btn btn-or" {% include lien-formulaire.html cle="seminaire" %}>Proposer un exposé</a></div>
       </div>
       <div class="etat-vide" id="recherche-vide" hidden><h3>Aucune séance ne correspond</h3><p>Essayez un autre nom ou un autre mot du titre.</p></div>
     </div>

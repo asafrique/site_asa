@@ -174,7 +174,7 @@ suivant:
         <h2>Le prochain exposé est peut-être le vôtre</h2>
         <p>Thèse en cours, résultat récent, sujet que vous voulez faire connaître : le séminaire ASA accueille les travaux à tous les stades. Une heure, en ligne, devant un public venu de plusieurs continents.</p>
         <div class="hero-actions">
-          <a class="btn btn-or" href="{{ s.formulaire_seminaire }}" target="_blank" rel="noopener">Proposer un exposé</a>
+          <a class="btn btn-or" {% include lien-formulaire.html cle="seminaire" %}>Proposer un exposé</a>
           <a class="btn btn-ligne" href="{{ '/seminaires.html' | relative_url }}">Voir les séances passées</a>
         </div>
       </div>

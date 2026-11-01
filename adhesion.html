@@ -2,6 +2,29 @@
 layout: default
 title: "Adhérer"
 description: "Rejoindre l’Association Sciences pour l’Afrique : qui peut adhérer et comment candidater."
+profils:
+  - Étudiant·e en licence
+  - Étudiant·e en master
+  - Doctorant·e
+  - Postdoctorant·e
+  - Enseignant·e-chercheur·e
+  - Chercheur·e
+  - Enseignant·e du secondaire
+  - Ingénieur·e ou professionnel·le
+  - Autre
+domaines:
+  - Maths / Maths appliquées
+  - Informatique
+  - Physique / Chimie
+  - Biologie / Santé
+  - Sciences de l’ingénieur / Automatique
+  - Économie / Finance
+  - Sciences humaines et sociales
+  - Autre
+types_adhesion:
+  - "Membre actif — je participe et je suis à jour de mes cotisations"
+  - "Membre bienfaiteur — je soutiens par un don ou un service important"
+  - "Je ne sais pas encore"
 suivant:
   - lien: /seminaires.html
     titre: "ASA Séminaire"
@@ -19,7 +42,7 @@ suivant:
       <h1>Adhérer à ASA</h1>
       <p>Un formulaire, quelques minutes, et vous rejoignez une communauté de chercheuses et chercheurs répartis entre l’Afrique, l’Europe et l’Amérique du Nord.</p>
       <div class="hero-actions">
-        <a class="btn btn-or" href="{{ site.data.site.formulaire_adhesion }}" target="_blank" rel="noopener">Remplir le formulaire d’adhésion</a>
+        <a class="btn btn-or" {% include lien-formulaire.html cle="adhesion" %}>Remplir le formulaire d’adhésion</a>
         <a class="btn btn-ligne" href="contact.html">Nous poser une question</a>
       </div>
     </div>
@@ -49,6 +72,59 @@ suivant:
   </div>
 </section>
 
+{%- assign s = site.data.site -%}
+{%- if s.inscriptions_url and s.inscriptions_url != "" %}
+<section class="bloc" id="formulaire">
+  <div class="wrap">
+    <div class="grille-form">
+      <div class="intro-bloc">
+        <h2>Formulaire d’adhésion</h2>
+        <p>Trois minutes suffisent. Le bureau exécutif examine chaque demande et vous répond par e-mail. Vous recevez tout de suite un accusé de réception.</p>
+        <p class="note-form">Les champs marqués <span class="requis">*</span> sont obligatoires.</p>
+      </div>
+      <form class="formulaire-contact form-inscription" action="{{ s.inscriptions_url }}" method="post" novalidate
+            data-succes="Merci ! Votre demande d’adhésion est bien enregistrée. Un e-mail de confirmation vient de vous être envoyé ; le bureau vous répondra rapidement."
+            data-secours="{{ s.google_form_adhesion }}">
+        <input type="hidden" name="type" value="adhesion">
+        <input type="text" name="site_web_bis" class="piege" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="champs-2">
+          <label>Nom et prénom(s) <span class="requis">*</span><input type="text" name="nom" required autocomplete="name"></label>
+          <label>Adresse e-mail <span class="requis">*</span><input type="email" name="email" required autocomplete="email"></label>
+        </div>
+        <div class="champs-2">
+          <label>Ville / Pays de résidence <span class="requis">*</span><input type="text" name="ville_pays" required placeholder="Ex. : Cotonou, Bénin"></label>
+          <label>Profil <span class="requis">*</span>
+            <select name="profil" required>
+              <option value="">Choisir…</option>
+              {%- for o in page.profils %}<option>{{ o }}</option>{% endfor %}
+            </select>
+          </label>
+        </div>
+        <fieldset>
+          <legend>Domaine(s) <span class="requis">*</span></legend>
+          <div class="cases" data-un-requis>
+            {%- for d in page.domaines %}<label class="case"><input type="checkbox" name="domaines" value="{{ d }}"> {{ d }}</label>{% endfor %}
+          </div>
+        </fieldset>
+        <label>Établissement ou organisme<input type="text" name="etablissement" placeholder="Université, laboratoire, école, entreprise…"></label>
+        <fieldset>
+          <legend>Type d’adhésion <span class="requis">*</span></legend>
+          <div class="choix">
+            {%- for o in page.types_adhesion %}<label class="case"><input type="radio" name="type_adhesion" value="{{ o }}" required> {{ o }}</label>{% endfor %}
+          </div>
+        </fieldset>
+        <label>Pourquoi souhaitez-vous rejoindre l’ASA ?<textarea name="motivation" rows="4"></textarea></label>
+        <label class="case"><input type="checkbox" name="restons_connectes" value="Oui"> Je souhaite rejoindre le <a href="{% for r in s.reseaux %}{% if r.nom == 'WhatsApp' %}{{ r.lien }}{% endif %}{% endfor %}" target="_blank" rel="noopener">groupe WhatsApp</a> et recevoir les annonces de l’association.</label>
+        <label>Commentaires ou suggestions<textarea name="commentaires" rows="3"></textarea></label>
+        <label class="case consentement"><input type="checkbox" name="consentement" value="Oui" required> J’accepte que l’ASA conserve ces informations pour traiter ma demande et me contacter. Elles ne sont jamais transmises à des tiers. <span class="requis">*</span></label>
+        <button class="btn btn-or" type="submit">Envoyer ma demande d’adhésion</button>
+        <p class="formulaire-statut" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+{%- endif %}
+
 <section class="bloc bloc-ivoire">
   <div class="wrap">
     <div class="encadre">
@@ -56,7 +132,7 @@ suivant:
         <h2>Trois minutes, pas plus</h2>
         <p>Le formulaire demande votre identité, votre statut académique et votre domaine. Le bureau exécutif examine les candidatures au fil de l’eau et vous répond par courriel.</p>
         <div class="hero-actions">
-          <a class="btn btn-or" href="{{ site.data.site.formulaire_adhesion }}" target="_blank" rel="noopener">Adhérer maintenant</a>
+          <a class="btn btn-or" {% include lien-formulaire.html cle="adhesion" %}>Adhérer maintenant</a>
         </div>
       </div>
       <ol>

@@ -85,7 +85,7 @@ suivant:
         <span class="suite">{{ l.texte }}</span>
       </a>
       {%- endfor %}
-      <a class="carte" href="{{ s.formulaire_seminaire }}" target="_blank" rel="noopener">
+      <a class="carte" {% include lien-formulaire.html cle="seminaire" %}>
         <h3>Proposer un mini-cours</h3>
         <p>Vous maîtrisez un sujet et voulez le transmettre ? Décrivez-le nous avec le formulaire du séminaire.</p>
         <span class="suite">Remplir le formulaire</span>

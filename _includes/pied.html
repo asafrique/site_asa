@@ -22,7 +22,7 @@
         <h4>Participer</h4>
         <ul>
           <li><a href="{{ '/adhesion.html' | relative_url }}">Adhérer</a></li>
-          <li><a href="{{ s.formulaire_seminaire }}" target="_blank" rel="noopener">Proposer un exposé</a></li>
+          <li><a {% include lien-formulaire.html cle="seminaire" %}>Proposer un exposé</a></li>
           <li><a href="{{ '/journal.html#publier' | relative_url }}">Publier un article</a></li>
           <li><a href="{{ '/contact.html' | relative_url }}">Nous écrire</a></li>
           <li><a href="{{ '/bureau.html' | relative_url }}">Le bureau exécutif</a></li>

@@ -1,0 +1,130 @@
+---
+layout: default
+title: "Proposer un exposé"
+menu_actif: /activites.html
+description: "Proposer un exposé au séminaire ASA : une heure en ligne, le deuxième dimanche du mois à 20 h (heure de Paris). Créneaux disponibles et formulaire."
+statuts:
+  - "Étudiant·e en master / Master’s student"
+  - "Doctorant·e / PhD student"
+  - "Postdoctorant·e / Postdoc"
+  - "Enseignant·e-chercheur·e, chercheur·e / Lecturer, researcher"
+  - "Professeur·e / Professor"
+  - "Ingénieur·e, professionnel·le / Engineer, professional"
+  - "Autre / Other"
+connu_par:
+  - "Site ASA / ASA website"
+  - "WhatsApp"
+  - "LinkedIn"
+  - "Facebook / Instagram"
+  - "Un·e collègue / A colleague"
+  - "Autre / Other"
+suivant:
+  - lien: /seminaires.html
+    titre: "Les séances passées"
+    texte: "[nb_seances] exposés archivés depuis 2021"
+  - lien: /adhesion.html
+    titre: "Adhérer"
+    texte: "Rejoindre l’association"
+  - lien: /contact.html
+    titre: "Une question ?"
+    texte: "Écrivez au bureau"
+---
+{%- assign s = site.data.site -%}
+{%- assign aujourdhui = site.time | date: "%Y%m%d" | plus: 0 -%}
+<section class="bloc">
+  <div class="wrap">
+    <div class="intro-bloc">
+      <h1>Proposer un exposé</h1>
+      <p>Thèse en cours, résultat récent, sujet que vous voulez faire connaître : le séminaire ASA accueille les travaux à tous les stades. Une heure en visioconférence, <b>le deuxième dimanche du mois à 20 h (heure de Paris)</b>, devant un public venu de plusieurs continents. Exposé en français ou en anglais.</p>
+      <p class="en">Want to give a talk? The ASA Seminar takes place online on the second Sunday of each month at 8 pm (Paris time). Talks can be in French or English.</p>
+    </div>
+
+    {%- if site.data.creneaux.size > 0 %}
+    <h2 class="titre-creneaux">Créneaux 2026-2027</h2>
+    <ul class="creneaux">
+      {%- for c in site.data.creneaux %}
+      {%- assign jour_c = c.date | date: "%Y%m%d" | plus: 0 %}
+      {%- if jour_c < aujourdhui %}{% continue %}{% endif %}
+      <li class="{% if c.pris %}pris{% else %}libre{% endif %}">
+        <b>{{ c.mois }}</b>
+        <span>{% include date-fr.html date=c.date %}</span>
+        <em>{% if c.pris %}Programmé{% else %}Disponible{% endif %}</em>
+      </li>
+      {%- endfor %}
+    </ul>
+    {%- endif %}
+  </div>
+</section>
+
+<section class="bloc bloc-blanc" id="formulaire">
+  <div class="wrap">
+    {%- if s.inscriptions_url and s.inscriptions_url != "" %}
+    <div class="grille-form">
+      <div class="intro-bloc">
+        <h2>Votre proposition</h2>
+        <p>Remplissez ce formulaire : nous revenons vers vous pour fixer la date et préparer l’affiche. Un e-mail de confirmation vous est envoyé immédiatement.</p>
+        <ol class="etapes-form">
+          <li>Vous envoyez votre proposition.</li>
+          <li>Nous fixons la date et préparons l’affiche.</li>
+          <li>L’annonce part sur tous nos réseaux.</li>
+          <li>La séance est archivée sur le site.</li>
+        </ol>
+        <p class="note-form">Les champs marqués <span class="requis">*</span> sont obligatoires.</p>
+      </div>
+      <form class="formulaire-contact form-inscription" action="{{ s.inscriptions_url }}" method="post" novalidate
+            data-succes="Merci ! Votre proposition est bien enregistrée. Un e-mail de confirmation vient de vous être envoyé ; nous revenons vers vous pour fixer la date. / Thank you, your proposal has been received."
+            data-secours="{{ s.google_form_seminaire }}">
+        <input type="hidden" name="type" value="seminaire">
+        <input type="text" name="site_web_bis" class="piege" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="champs-2">
+          <label>Nom complet <small>Full name</small> <span class="requis">*</span><input type="text" name="nom" required autocomplete="name"></label>
+          <label>E-mail <span class="requis">*</span><input type="email" name="email" required autocomplete="email"></label>
+        </div>
+        <div class="champs-2">
+          <label>Pays / ville <small>Country / city</small> <span class="requis">*</span><input type="text" name="pays_ville" required></label>
+          <label>Statut actuel <small>Current status</small> <span class="requis">*</span>
+            <select name="statut" required>
+              <option value="">Choisir… / Choose…</option>
+              {%- for o in page.statuts %}<option>{{ o }}</option>{% endfor %}
+            </select>
+          </label>
+        </div>
+        <div class="champs-2">
+          <label>Établissement <small>Institution</small><input type="text" name="etablissement" placeholder="Université, laboratoire…"></label>
+          <label>Domaine(s) <small>Field(s)</small> <span class="requis">*</span><input type="text" name="domaines" required placeholder="Ex. : théorie du contrôle, EDP"></label>
+        </div>
+        <label>Titre de l’exposé <small>Title of your talk</small> <span class="requis">*</span><input type="text" name="titre" required></label>
+        <label>Résumé <small>Abstract (quelques lignes / a few lines)</small><textarea name="resume" rows="5"></textarea></label>
+        <div class="champs-2">
+          <label>Mois souhaité <small>Preferred month</small>
+            <select name="mois">
+              <option>Pas de préférence / No preference</option>
+              {%- for c in site.data.creneaux %}{% assign jour_c = c.date | date: "%Y%m%d" | plus: 0 %}{% unless c.pris or jour_c < aujourdhui %}{% capture d_c %}{% include date-fr.html date=c.date %}{% endcapture %}<option>{{ c.mois }} ({{ d_c | strip }})</option>{% endunless %}{% endfor %}
+            </select>
+          </label>
+          <label>Comment avez-vous connu ASA ? <small>How did you hear about us?</small>
+            <select name="connu_par">
+              <option value="">Choisir… / Choose…</option>
+              {%- for o in page.connu_par %}<option>{{ o }}</option>{% endfor %}
+            </select>
+          </label>
+        </div>
+        <label>Page web ou LinkedIn <small>Website or LinkedIn (facultatif / optional)</small><input type="url" name="page_web" placeholder="https://"></label>
+        <label class="case"><input type="checkbox" name="restons_connectes" value="Oui"> Je souhaite recevoir les annonces des séminaires ASA. <small>I’d like to receive ASA seminar announcements.</small></label>
+        <label>Commentaires <small>Comments</small><textarea name="commentaires" rows="3"></textarea></label>
+        <label class="case consentement"><input type="checkbox" name="consentement" value="Oui" required> J’accepte que l’ASA conserve ces informations pour organiser le séminaire et me contacter. <small>I agree that ASA keeps this information to organise the seminar and contact me.</small> <span class="requis">*</span></label>
+        <button class="btn btn-or" type="submit">Envoyer ma proposition / Submit</button>
+        <p class="formulaire-statut" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+    {%- else %}
+    <div class="intro-bloc">
+      <h2>Votre proposition</h2>
+      <p>Remplissez le formulaire ASA Séminaire : nous revenons vers vous pour fixer la date.</p>
+      <a class="btn btn-or" href="{{ s.google_form_seminaire }}" target="_blank" rel="noopener">Ouvrir le formulaire</a>
+    </div>
+    {%- endif %}
+  </div>
+</section>
+
+{% include suivant.html cartes=page.suivant %}

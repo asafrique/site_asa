@@ -1,0 +1,32 @@
+# Créneaux du séminaire ASA 2026-2027 : deuxième dimanche du mois, 20 h (heure de Paris).
+# Cochez « pris » quand un orateur est programmé : le mois n'est plus proposé dans le formulaire.
+- mois: Octobre 2026
+  date: 2026-10-11
+  pris: true
+- mois: Novembre 2026
+  date: 2026-11-08
+  pris: false
+- mois: Décembre 2026
+  date: 2026-12-13
+  pris: true
+- mois: Janvier 2027
+  date: 2027-01-10
+  pris: false
+- mois: Février 2027
+  date: 2027-02-14
+  pris: false
+- mois: Mars 2027
+  date: 2027-03-14
+  pris: false
+- mois: Avril 2027
+  date: 2027-04-11
+  pris: false
+- mois: Mai 2027
+  date: 2027-05-09
+  pris: false
+- mois: Juin 2027
+  date: 2027-06-13
+  pris: false
+- mois: Juillet 2027
+  date: 2027-07-11
+  pris: false

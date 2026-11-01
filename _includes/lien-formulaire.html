@@ -1,0 +1,6 @@
+{%- comment -%} href vers le formulaire d'adhésion ou de séminaire ; nouvel onglet seulement si le lien est externe. {%- endcomment -%}
+{%- assign s_lf = site.data.site -%}
+{%- if include.cle == "adhesion" -%}{%- assign u_lf = s_lf.formulaire_adhesion -%}{%- assign g_lf = s_lf.google_form_adhesion -%}
+{%- else -%}{%- assign u_lf = s_lf.formulaire_seminaire -%}{%- assign g_lf = s_lf.google_form_seminaire -%}{%- endif -%}
+{%- if s_lf.inscriptions_url == nil or s_lf.inscriptions_url == "" -%}{%- if g_lf and g_lf != "" -%}{%- assign u_lf = g_lf -%}{%- endif -%}{%- endif -%}
+href="{{ u_lf | relative_url }}"{% if u_lf contains "://" %} target="_blank" rel="noopener"{% endif -%}

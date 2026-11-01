@@ -110,3 +110,44 @@ img.membre-photo{object-fit:cover;padding:0}
 .intro-ligne{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:var(--pas-2);max-width:none}
 .lien-suite{font-weight:700;color:var(--bronze);white-space:nowrap}
 .lien-suite::after{content:" →"}
+
+/* ---------- Formulaires d'adhésion et de proposition d'exposé ---------- */
+.grille-form{display:grid;grid-template-columns:minmax(220px,1fr) 2fr;gap:var(--pas-4);align-items:start}
+.grille-form>.intro-bloc{position:sticky;top:110px}
+@media (max-width:900px){.grille-form{grid-template-columns:1fr}.grille-form>.intro-bloc{position:static}}
+.form-inscription{margin:0}
+.formulaire-contact label small,.formulaire-contact legend small,.case small{font-weight:400;color:var(--gris);font-size:.82rem}
+.requis{color:#9a2b1d}
+.note-form{font-size:.88rem;color:var(--gris)}
+.formulaire-contact fieldset{border:0;margin:0;padding:0;min-width:0}
+.formulaire-contact legend{font-weight:700;font-size:.9rem;color:var(--bronze-fonce);margin-bottom:8px;padding:0}
+.cases{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px 16px;padding:10px;border-radius:var(--rayon);border:1px solid transparent}
+.cases.invalide{border-color:#9a2b1d;background:#fbeeea}
+.choix{display:grid;gap:6px}
+.formulaire-contact label.case{display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:.95rem;color:var(--encre);line-height:1.45;cursor:pointer}
+.formulaire-contact label.case input{width:18px;height:18px;flex:0 0 18px;margin:2px 0 0;padding:0;accent-color:var(--bronze)}
+.formulaire-contact .consentement{padding:12px 14px;background:var(--ivoire);border-radius:var(--rayon);font-size:.88rem}
+.envoi-reussi{background:var(--blanc);border:2px solid var(--or);border-radius:var(--rayon-lg);padding:var(--pas-4) var(--pas-3);text-align:center;outline:none}
+.envoi-reussi .coche{display:inline-grid;place-items:center;width:56px;height:56px;border-radius:50%;background:var(--bronze);color:var(--or);font-size:1.6rem;font-weight:700}
+.envoi-reussi p{font-size:1.05rem;max-width:520px;margin:var(--pas-2) auto var(--pas-3)}
+.etapes-form{padding-left:20px;color:var(--gris);font-size:.95rem}
+.etapes-form li{margin-bottom:4px}
+.intro-bloc .en{color:var(--gris);font-style:italic;font-size:.95rem}
+
+/* ---------- Créneaux du séminaire ---------- */
+.titre-creneaux{margin-top:var(--pas-4);font-size:1.3rem}
+.creneaux{list-style:none;margin:var(--pas-2) 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.creneaux li{background:var(--blanc);border:1px solid rgba(110,90,51,.2);border-radius:var(--rayon-lg);padding:12px 14px;display:grid;gap:2px}
+.creneaux b{font-family:var(--serif);font-size:1.02rem}
+.creneaux span{font-size:.85rem;color:var(--gris)}
+.creneaux em{font-style:normal;font-size:.78rem;font-weight:700;justify-self:start;margin-top:6px;padding:2px 10px;border-radius:100px}
+.creneaux .libre{border-color:var(--or)}
+.creneaux .libre em{background:var(--or-pale);color:var(--bronze-fonce)}
+.creneaux .pris{opacity:.6}
+.creneaux .pris em{background:var(--ivoire-2);color:var(--gris)}
+/* libellés : texte, traduction et astérisque sur une même ligne */
+.form-inscription label:not(.case){display:block}
+.form-inscription label:not(.case)>input,.form-inscription label:not(.case)>select,.form-inscription label:not(.case)>textarea{display:block;margin-top:6px}
+.form-inscription label.case{display:block;position:relative;padding-left:28px}
+.form-inscription label.case input{position:absolute;left:0;top:1px;margin:0}
+.form-inscription .champs-2{align-items:end}

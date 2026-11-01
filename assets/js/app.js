@@ -313,6 +313,54 @@
     });
   }
 
+  /* ---------------------------------------------------------- adhésion / proposition d'exposé
+     Les réponses partent vers le tableur Google de l'association (Apps Script). */
+  $$(".form-inscription").forEach(function (f) {
+    var statutI = $(".formulaire-statut", f);
+    var groupe = $("[data-un-requis]", f);
+    if (groupe) groupe.addEventListener("change", function () { groupe.classList.remove("invalide"); });
+    f.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var groupeOk = !groupe || $$("input:checked", groupe).length > 0;
+      if (groupe) groupe.classList.toggle("invalide", !groupeOk);
+      if (!f.checkValidity() || !groupeOk) {
+        statutI.className = "formulaire-statut erreur";
+        statutI.textContent = "Merci de compléter les champs obligatoires (*).";
+        if (!f.checkValidity()) f.reportValidity(); else groupe.scrollIntoView({ block: "center" });
+        return;
+      }
+      var bouton = $("button[type=submit]", f);
+      var texteBouton = bouton.textContent;
+      bouton.disabled = true; bouton.textContent = "Envoi en cours…";
+      statutI.className = "formulaire-statut"; statutI.textContent = "";
+      var corps = new URLSearchParams(new FormData(f));
+      var reussi = function () {
+        var bloc = document.createElement("div");
+        bloc.className = "envoi-reussi";
+        bloc.setAttribute("tabindex", "-1");
+        bloc.innerHTML = '<span class="coche" aria-hidden="true">✓</span><p></p>' +
+          '<a class="btn btn-ligne" href="' + location.pathname + '">Envoyer une autre réponse</a>';
+        $("p", bloc).textContent = f.dataset.succes;
+        f.replaceWith(bloc);
+        bloc.focus();
+        bloc.scrollIntoView({ behavior: lent ? "auto" : "smooth", block: "center" });
+      };
+      var echec = function () {
+        bouton.disabled = false; bouton.textContent = texteBouton;
+        statutI.className = "formulaire-statut erreur";
+        statutI.innerHTML = "L’envoi n’a pas abouti. Réessayez dans un instant" +
+          (f.dataset.secours ? ', ou utilisez <a href="' + f.dataset.secours + '" target="_blank" rel="noopener">le formulaire de secours</a>' : "") + ".";
+      };
+      fetch(f.action, { method: "POST", body: corps })
+        .then(function (r) { return r.json(); })
+        .then(function (r) { if (r && r.success) reussi(); else echec(); })
+        .catch(function () {
+          /* Réponse illisible (sécurité du navigateur) : la ligne est en général bien enregistrée. */
+          if (navigator.onLine) reussi(); else echec();
+        });
+    });
+  });
+
   /* ---------------------------------------------------------- bouton « haut de page » */
   var haut = document.createElement("button");
   haut.type = "button"; haut.className = "haut-de-page"; haut.setAttribute("aria-label", "Revenir en haut de la page");

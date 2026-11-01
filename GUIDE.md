@@ -35,6 +35,32 @@ Les messages arrivent avec l’objet `[Site ASA] Sujet — Nom` ; il suffit de c
 
 ---
 
+## 2 bis. Formulaires d’adhésion et de proposition d’exposé → tableur + Excel
+
+Les réponses des pages **Adhérer** et **Proposer un exposé** arrivent dans le tableur Google
+**« ASA – Adhésions et propositions d’exposé (site web) »** (dossier Drive *ASA_Communication*), onglets
+**Adhésions** et **Séminaire**. À chaque réponse : nouvelle ligne, e-mail d’alerte à contact@asafrique.org,
+e-mail de confirmation à la personne, et mise à jour du fichier **ASA_inscriptions.xlsx** rangé à côté.
+
+Installation (une seule fois, 5 minutes) :
+1. Ouvrez le tableur → menu **Extensions → Apps Script**.
+2. Effacez le contenu de `Code.gs`, collez le contenu du fichier `apps-script/Code.gs`, cliquez sur 💾.
+3. En haut, choisissez la fonction **installer** → **Exécuter** → autorisez l’accès
+   (« Paramètres avancés » → « Accéder à … (non sécurisé) » : c’est votre propre script).
+   Les anciennes réponses des Google Forms sont reprises automatiquement.
+4. **Déployer → Nouveau déploiement** → type **Application Web** → *Exécuter en tant que* : **Moi** ;
+   *Qui a accès* : **Tout le monde** → **Déployer** → copiez l’**URL de l’application Web**.
+5. Pages CMS → **Réglages du site** → collez-la dans **Adresse du service des formulaires** → **Save**.
+
+Tant que ce champ est vide, les boutons du site ouvrent les anciens Google Forms.
+Pour modifier le script plus tard : **Déployer → Gérer les déploiements → ✏️ → Nouvelle version**
+(l’URL ne change pas).
+
+Créneaux du séminaire : Pages CMS → **Créneaux du séminaire** ; cochez « Créneau déjà pris » quand un
+orateur est programmé. Les mois passés disparaissent tout seuls.
+
+---
+
 ## 3. Modifier le site avec Pages CMS
 
 1. Ouvrez **https://app.pagescms.org** → **Sign in with GitHub** (compte qui gère `asafrique`).

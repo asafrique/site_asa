@@ -48,8 +48,8 @@ suivant:
 
         <h2 style="margin-top:var(--pas-4)">Participer directement</h2>
         <ul class="liste-nue">
-          <li><a href="{{ s.formulaire_adhesion }}" target="_blank" rel="noopener">Formulaire d’adhésion à l’association</a></li>
-          <li><a href="{{ s.formulaire_seminaire }}" target="_blank" rel="noopener">Formulaire ASA Séminaire, proposer un exposé</a></li>
+          <li><a {% include lien-formulaire.html cle="adhesion" %}>Formulaire d’adhésion à l’association</a></li>
+          <li><a {% include lien-formulaire.html cle="seminaire" %}>Formulaire ASA Séminaire, proposer un exposé</a></li>
           <li><a href="{{ '/journal.html#publier' | relative_url }}">Proposer un article au journal de vulgarisation</a></li>
         </ul>
       </div>
