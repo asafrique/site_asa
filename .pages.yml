@@ -307,11 +307,15 @@ content:
       - name: publication_jo
         label: Publication au Journal officiel
         type: string
-      - name: formulaire_adhesion
-        label: Lien du formulaire d'adhésion
+      - name: inscriptions_url
+        label: Adresse du service des formulaires (Apps Script)
         type: string
-      - name: formulaire_seminaire
-        label: Lien du formulaire « Proposer un exposé »
+        description: "URL de l'application Web (commence par https://script.google.com/macros/s/…). Vide = les boutons ouvrent les anciens Google Forms."
+      - name: google_form_adhesion
+        label: Google Form d'adhésion (secours)
+        type: string
+      - name: google_form_seminaire
+        label: Google Form ASA Seminar (secours)
         type: string
       - name: heure_seminaire
         label: Heure habituelle du séminaire (heure de Paris)
@@ -340,6 +344,24 @@ content:
         label: Clé Web3Forms (formulaire de contact)
         type: string
         description: "Clé reçue par e-mail sur web3forms.com. Vide = le formulaire ouvre la messagerie du visiteur."
+
+  - name: creneaux
+    label: Créneaux du séminaire (formulaire « Proposer un exposé »)
+    type: file
+    path: _data/creneaux.yml
+    list: true
+    fields:
+      - name: mois
+        label: Mois
+        type: string
+        description: "Ex. : Novembre 2026"
+      - name: date
+        label: Date de la séance
+        type: date
+      - name: pris
+        label: Créneau déjà pris
+        type: boolean
+        description: "Coché = le mois n'est plus proposé dans le formulaire."
 
   - name: menu
     label: Menu du site
